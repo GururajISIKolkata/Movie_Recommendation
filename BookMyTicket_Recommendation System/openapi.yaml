@@ -1,0 +1,115 @@
+openapi: 3.0.0
+info:
+  title: Book My Ticket
+  description: >
+
+  version: 1.0.0
+servers:
+  - url: http://127.0.0.1:8080/
+paths:
+  /api/movie/{id}:
+    description: for read,update,delete operation on movie
+    get:
+      description: for read movie
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            example: 76
+      responses:
+        '200':
+          description: Request Successful
+        '500':
+          description: Internal Server Error
+        '404':
+          description: Movie not found
+
+    put:
+      description: update movie
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            example: 76
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "Sita Ramam"
+                caption:
+                  type: string
+                  example: "On a letter-delivering task, Afreen learns of a 20-year-old romance set amidst a war. Her quest to t ..."
+                rating:
+                  type: integer
+                  example: 3
+                tags:
+                  type: string
+                  example: "Romance, Drama, Hindi, 2022"
+      responses:
+        '200':
+          description: Successfuly updated
+        '404':
+          description: Movie not found
+        '500':
+          description: Internal Server Error
+        '400':
+          description: Bad request
+    delete:
+      description: delete movie
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            example: 76
+      responses:
+        '200':
+          description: Successfully Deleted
+        '404':
+          description: Movie not found
+        '500':
+          description: Intenal Server Error
+
+  /api/movie:
+    description: create operation on movie
+    post:
+      description: create new movie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "Sita Ramam"
+                caption:
+                  type: string
+                  example: "On a letter-delivering task, Afreen learns of a 20-year-old romance set amidst a war. Her quest to t ..."
+                rating:
+                  type: integer
+                  example: 3
+                tags:
+                  type: string
+                  example: "Romance, Drama, Hindi, 2022"
+      responses:
+        '201':
+          description: Successfully Created
+        '409':
+          description: Movie already exist
+        '500':
+          description: Internal Server Error
+        '400':
+          description: Bad request
+  
+
+  
